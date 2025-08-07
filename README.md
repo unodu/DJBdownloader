@@ -62,7 +62,7 @@ If values are missing, you will be prompted to enter them interactively.
 This downloader needs your station’s callsign code to construct valid file URLs. It will:
 
 1. **Auto-detect** from the second `<div class="menuBar">` on the archive index page (e.g. `<a href="index.php?d=7&m=8&y=2025&c=0">BSR</a>`).  
-2. If **multiple callsigns** are found, you will be prompted to select one.  
+2. If **multiple callsigns** are found (which may be the case when DJB is logging multiple stations at once), you will be prompted to select one.  
 3. If none or detection fails, it will **fall back** to parsing the first table’s **Group** column.  
 4. Finally, if still not found, you will be prompted to enter it manually.  
 5. A **link** to the index page (e.g. `https://station.example.com/index.php?c=0&d=7&m=8&y=2025`) is provided to the user to manually input for convenience.
