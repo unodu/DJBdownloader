@@ -59,7 +59,7 @@ If values are missing, you will be prompted to enter them interactively.
 
 ## Station Callsign Detection
 
-This downloader needs your station’s callsign code to construct valid file URLs. It will:
+DJBdownloader needs your station’s callsign code to construct valid file URLs. It will:
 
 1. **Auto-detect** from the second `<div class="menuBar">` on the archive index page (e.g. `<a href="index.php?d=7&m=8&y=2025&c=0">BSR</a>`).  
 2. If **multiple callsigns** are found (which may be the case when DJB is logging multiple stations at once), you will be prompted to select one.  
