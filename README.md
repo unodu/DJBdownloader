@@ -10,6 +10,7 @@ This tool is useful for DJs, station archivists, or content curators who need to
 
 - Logs in to DJB File Viewer with session persistence
 - Supports configurable schedules (day-of-week and hours)
+- Detects station callsign if none provided
 - Downloads audio segments (typically hourly MP3s)
 - Concatenates segments via `ffmpeg` into one long MP3 (programmed at 150 minutes, but can be customized for your specific needs)
 - Verifies audio files with `ffmpeg`
@@ -56,6 +57,20 @@ If values are missing, you will be prompted to enter them interactively.
 
 ---
 
+## Station Callsign Detection
+
+This downloader needs your station’s callsign code to construct valid file URLs. It will:
+
+1. **Auto-detect** from the second `<div class="menuBar">` on the archive index page (e.g. `<a href="index.php?d=7&m=8&y=2025&c=0">BSR</a>`).  
+2. If **multiple callsigns** are found, you will be prompted to select one.  
+3. If none or detection fails, it will **fall back** to parsing the first table’s **Group** column.  
+4. Finally, if still not found, you will be prompted to enter it manually.  
+5. A **link** to the index page (e.g. `https://station.example.com/index.php?c=0&d=7&m=8&y=2025`) is provided to the user to manually input for convenience.
+
+**Tip:** Log in to your archive and look just below the date picker to see your station code in the menu bar.
+
+---
+
 ## Formatting Schedules
 
 The `SCHEDULES` list is at the top of the script and defines the shows to fetch. Each item should be a tuple:
@@ -87,6 +102,8 @@ YYYY-MM-DD.mp3
 
 Intermediate downloaded segments are stored in a temporary subdirectory and cleaned up after successful concatenation.
 
+- Internally, filenames are prefixed with your station callsign (e.g., `BSR-YY-MM-DD-HH-00.mp3`) to match the server schema, but the final merged files are saved as `YYYY-MM-DD.mp3`.
+
 ---
 
 
@@ -95,6 +112,7 @@ Intermediate downloaded segments are stored in a temporary subdirectory and clea
 - Failed downloads or decode verification are logged.
 - Concatenation will still proceed if only some segments are valid.
 - The script prints friendly warnings and summaries throughout.
+- The script prints debug output of the fetched index page HTML when station code detection fails, so you can inspect why auto-detection missed your callsign.
 
 ---
 
@@ -105,7 +123,7 @@ Intermediate downloaded segments are stored in a temporary subdirectory and clea
 ## Credits
 
 - Built by **Micah Beck**, 2025
-- Version: **1.1.0**
+- Version: **1.2.0**
 - Tested on DJB File Viewer **v0.90.2**
 
 ---
